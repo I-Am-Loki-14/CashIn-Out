@@ -10,6 +10,11 @@
             box-sizing: border-box;
             padding: 0;
             margin: 0;
+
+            * {
+                font-family: 'Courier New', Courier, monospace;
+                font-weight: bold;
+            }
         }
 
         .container {
@@ -23,12 +28,13 @@
         }
 
         .container-box {
-            margin: 0 auto;
+
             background-color: antiquewhite;
-            width: 350px;
             padding: 1rem 1rem 1rem 1rem;
             border-radius: 0.5rem;
             position: relative;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
 
         }
 
@@ -81,10 +87,32 @@
             justify-content: center;
             align-items: center;
             padding: 1rem;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: bold;
             font-family: 'Courier New', Courier, monospace;
             margin: 1rem 0;
+        }
+
+        .checkbalan {
+            background: violet;
+            width: 100%;
+            /* padding: 1rem 1rem; */
+            border-radius: 0.5rem;
+            border: 1px solid gray;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .checkbalan button {
+            width: 100%;
+            padding: 1rem 1rem;
+            border-radius: 0.5rem;
+            border: 0px solid gray;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: rgb(254, 225, 154);
         }
     </style>
 </head>
@@ -101,6 +129,10 @@
                 <button onclick="cashIn()" id="cashin">Cash In</button>
                 <button onclick="cashOut()" id="cashout">Cash Out</button>
             </div>
+            <div class="checkbalan" id="checkbalan">
+                <button onclick="checkbalan()">Check Balance</button>
+            </div>
+
         </div>
     </div>
     <script>
@@ -109,6 +141,8 @@
         const CashOut = document.getElementById('cashout');
         const BalanceShow = document.getElementById('balance-show');
         const ShowAmount = document.getElementById('show-amount');
+        const Checkbalan = document.getElementById('checkbalan');
+        console.log(Checkbalan);
         console.log(InputAmount);
         console.log(CashIn);
         console.log(CashOut);
@@ -118,35 +152,44 @@
 
 
 
-        let CurrentBalance = 100000;
-        let C = CurrentBalance;
-        ShowAmount.innerHTML = CB.toLocaleString();
+        let CurrentBalance = 1000000;
+
         function cashIn() {
             let InputValue = Number(InputAmount.value);
             CurrentBalance += InputValue;
-            ShowAmount.innerHTML = CurrentBalance.toLocaleString();
+            ShowAmount.innerHTML = CurrentBalance.toLocaleString() + " Ks";
             InputAmount.value = "";
             if (InputValue == " ") {
-                alert("Enter amount");
-                ShowAmount.innerHTML = CurrentBalance.toLocaleString();
+                alert("Enter your Cash In amount");
+                ShowAmount.style.display = "none";
+                console.log("Stopped");
+                return;
+
+
             }
         }
         function cashOut() {
             let InputValue = Number(InputAmount.value);
             if (InputValue <= CurrentBalance) {
                 CurrentBalance -= InputValue;
-                ShowAmount.innerHTML = CurrentBalance.toLocaleString();
+                ShowAmount.innerHTML = CurrentBalance.toLocaleString() + " Ks";
                 InputAmount.value = "";
                 if (InputValue == " ") {
-                    alert("Enter amount");
-                    ShowAmount.innerHTML = CurrentBalance.toLocaleString();
+                    alert("Enter your Cash Out amount");
+                    ShowAmount.style.display = "none";
+                    console.log("Stopped");
+
                 }
             } else {
                 ShowAmount.innerHTML = " is low";
                 InputAmount.value = "";
             }
         }
-
+        // check balance 
+        function checkbalan() {
+            ShowAmount.style.display = "block";
+            ShowAmount.innerHTML = CurrentBalance.toLocaleString() + " Ks";
+        }
     </script>
 </body>
 
