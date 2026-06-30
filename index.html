@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATM Cashout</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+
+        .container {
+            /* background-color: goldenrod; */
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .container-box {
+            margin: 0 auto;
+            background-color: antiquewhite;
+            width: 350px;
+            padding: 1rem 1rem 1rem 1rem;
+            border-radius: 0.5rem;
+            position: relative;
+
+        }
+
+        .container-box input {
+            width: 100%;
+            padding: 2.5rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid gray;
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: 1rem;
+        }
+
+        .button-box {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .button-box button {
+            width: 100%;
+            padding: 1rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid gray;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .balance-show_container {
+            background-color: rgb(175, 250, 154);
+            padding: 2rem 1.5rem;
+            position: relative;
+            top: 0;
+            margin-bottom: 2rem;
+        }
+
+        .balance-show {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* background-color: aqua; */
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            font-size: 1.2rem;
+            font-weight: bold;
+            font-family: 'Courier New', Courier, monospace;
+            margin: 1rem 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="container-box">
+            <div class="balance-show_container">
+                <div class="balance-show" id="balance-show">Your Balance&ensp;&ensp;<span id="show-amount"></span>
+                </div>
+            </div>
+            <input type="number" placeholder="Enter Amount" class="amount" id="input-amount" for="amount">
+            <div class="button-box">
+                <button onclick="cashIn()" id="cashin">Cash In</button>
+                <button onclick="cashOut()" id="cashout">Cash Out</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        const InputAmount = document.getElementById('input-amount');
+        const CashIn = document.getElementById('cashin');
+        const CashOut = document.getElementById('cashout');
+        const BalanceShow = document.getElementById('balance-show');
+        const ShowAmount = document.getElementById('show-amount');
+        console.log(InputAmount);
+        console.log(CashIn);
+        console.log(CashOut);
+        console.log(BalanceShow);
+        console.log(ShowAmount);
+
+
+
+
+        let CurrentBalance = 100000;
+        let C = CurrentBalance;
+        ShowAmount.innerHTML = CB.toLocaleString();
+        function cashIn() {
+            let InputValue = Number(InputAmount.value);
+            CurrentBalance += InputValue;
+            ShowAmount.innerHTML = CurrentBalance.toLocaleString();
+            InputAmount.value = "";
+            if (InputValue == " ") {
+                alert("Enter amount");
+                ShowAmount.innerHTML = CurrentBalance.toLocaleString();
+            }
+        }
+        function cashOut() {
+            let InputValue = Number(InputAmount.value);
+            if (InputValue <= CurrentBalance) {
+                CurrentBalance -= InputValue;
+                ShowAmount.innerHTML = CurrentBalance.toLocaleString();
+                InputAmount.value = "";
+                if (InputValue == " ") {
+                    alert("Enter amount");
+                    ShowAmount.innerHTML = CurrentBalance.toLocaleString();
+                }
+            } else {
+                ShowAmount.innerHTML = " is low";
+                InputAmount.value = "";
+            }
+        }
+
+    </script>
+</body>
+
+</html>
