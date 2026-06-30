@@ -159,6 +159,8 @@
             CurrentBalance += InputValue;
             ShowAmount.innerHTML = CurrentBalance.toLocaleString() + " Ks";
             InputAmount.value = "";
+            return;
+
             if (InputValue == " ") {
                 alert("Enter your Cash In amount");
                 ShowAmount.style.display = "none";
@@ -174,6 +176,8 @@
                 CurrentBalance -= InputValue;
                 ShowAmount.innerHTML = CurrentBalance.toLocaleString() + " Ks";
                 InputAmount.value = "";
+                return;
+
                 if (InputValue == " ") {
                     alert("Enter your Cash Out amount");
                     ShowAmount.style.display = "none";
